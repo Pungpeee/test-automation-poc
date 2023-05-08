@@ -47,11 +47,7 @@ jobs:
           push: true
           tags: vekawspocregistry.azurecr.io/poc-automation:latest
           file: Dockerfile
-  
-      - run: |
-          docker build -t vekawspocregistry.azurecr.io/poc-automation:latest .
-          docker push vekawspocregistry.azurecr.io/poc-automation:latest
-          docker run -d vekawspocregistry.azurecr.io/poc-automation:latest
+
 
   deploy:
       needs: build
@@ -65,5 +61,6 @@ jobs:
          username: ${{ secrets.USERNAME }}
          password: ${{ secrets.PASSWORD }}
          script: |
-           docker stop vekawspocregistry.azurecr.io/poc-automation:latest
-           docker pull vekawspocregistry.azurecr.io/poc-automation:latest
+           docker build -t vekawspocregistry.azurecr.io/poc-automation:latest .
+           docker run -d vekawspocregistry.azurecr.io/poc-automation:latest
+           
