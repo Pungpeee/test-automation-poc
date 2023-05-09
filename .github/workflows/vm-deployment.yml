@@ -32,12 +32,6 @@ jobs:
       needs: build
       runs-on: ubuntu-latest
       steps:
-      - name: Deploy execute command ssh to remote server
-        uses: appleboy/ssh-action@master
-        with:
-         host: ${{ secrets.HOST }}
-         username: ${{ secrets.USERNAME }}
-         password: ${{ secrets.PASSWORD }}
 
       - name: Azure Container Registry Login
         uses: azure/docker-login@v1
@@ -46,12 +40,21 @@ jobs:
           username: ${{ secrets.REGISTRY_USERNAME }}
           password: ${{ secrets.REGISTRY_PASSWORD }}
 
+      - name: Deploy execute command ssh to remote server
+        env:
+           IMAGE_NAME: vekawspocregistry.azurecr.io/poc-automation-test:test
+        uses: appleboy/ssh-action@master
+        with:
+         host: ${{ secrets.HOST }}
+         username: ${{ secrets.USERNAME }}
+         password: ${{ secrets.PASSWORD }}
+
+
         #  script: |
         #    docker login vekawspocregistry.azurecr.io -u ${{ secrets.REGISTRY_USERNAME }} -p ${{ secrets.REGISTRY_PASSWORD }}
         #    docker pull vekawspocregistry.azurecr.io/poc-automation-test:test
         #    docker ps -a
-          script: |
-           docker pull vekawspocregistry.azurecr.io/poc-automation-test:test
-           docker build -t vekawspocregistry.azurecr.io/poc-automation-test:test .
-           docker run -it vekawspocregistry.azurecr.io/poc-automation-test:test
-           docker ps -a
+         script: |
+              docker build -t vekawspocregistry.azurecr.io/poc-automation-test:test .
+              docker run -it vekawspocregistry.azurecr.io/poc-automation-test:test
+              docker ps -a
