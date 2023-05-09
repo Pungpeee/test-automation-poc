@@ -52,4 +52,4 @@ jobs:
         #    docker ps -a
           script: |
            docker pull vekawspocregistry.azurecr.io/poc-automation-test:test
-           docker run -it vekawspocregistry.azurecr.io/poc-automation-test:test -d
+           docker run -it vekawspocregistry.azurecr.io/poc-automation-test:test
