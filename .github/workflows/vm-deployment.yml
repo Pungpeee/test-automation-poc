@@ -26,7 +26,7 @@ jobs:
         with:
           push: true
           tags: vekawspocregistry.azurecr.io/poc-automation:latest
-          file: deployment/Dockerfile.dev
+          file: ./deployment/Dockerfile.dev
 
   deploy:
       needs: build
