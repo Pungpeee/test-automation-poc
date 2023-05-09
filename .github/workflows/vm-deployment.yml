@@ -51,6 +51,5 @@ jobs:
         #    docker pull vekawspocregistry.azurecr.io/poc-automation-test:test
         #    docker ps -a
           script: |
-           docker pull vekawspocregistry.azurecr.io/poc-automation-test:test
            docker build -t vekawspocregistry.azurecr.io/poc-automation-test:test .
            docker run -d vekawspocregistry.azurecr.io/poc-automation-test:test
