@@ -24,9 +24,10 @@ jobs:
       - name: Push docker image to ACR
         uses: docker/build-push-action@v2
         with:
+          context: .
           push: true
-          tags: vekawspocregistry.azurecr.io/poc-automation:latest
-          file: ./deployment/Dockerfile.dev
+          tags: vekawspocregistry.azurecr.io/poc-automation-test:test
+          file: Dockerfile
 
   deploy:
       needs: build
@@ -39,7 +40,7 @@ jobs:
          username: ${{ secrets.USERNAME }}
          password: ${{ secrets.PASSWORD }}
          script: |
-           docker pull vekawspocregistry.azurecr.io/poc-automation:latest
-           docker build -t vekawspocregistry.azurecr.io/poc-automation:latest .
-           docker run -d vekawspocregistry.azurecr.io/poc-automation:latest
+           docker pull vekawspocregistry.azurecr.io/poc-automation-test:test
+           docker build -t vekawspocregistry.azurecr.io/poc-automation-test:test .
+           docker run -d vekawspocregistry.azurecr.io/poc-automation-test:test
            
