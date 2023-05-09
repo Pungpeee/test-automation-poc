@@ -39,6 +39,7 @@ jobs:
          username: ${{ secrets.USERNAME }}
          password: ${{ secrets.PASSWORD }}
          script: |
+           docker login vekawspocregistry.azurecr.io -u ${{ secrets.REGISTRY_USERNAME }} -p ${{ secrets.REGISTRY_PASSWORD }}
            docker pull vekawspocregistry.azurecr.io/poc-automation-test:test
            docker ps -a
            
