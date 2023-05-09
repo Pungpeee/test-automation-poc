@@ -21,14 +21,13 @@ jobs:
           username: ${{ secrets.REGISTRY_USERNAME }}
           password: ${{ secrets.REGISTRY_PASSWORD }}
 
-      - name: Push docker image to ACR
+      - name: Build and Push docker image to ACR
         uses: docker/build-push-action@v2
         with:
           context: .
           push: true
           tags: vekawspocregistry.azurecr.io/poc-automation-test:test
-          file: Dockerfile
-
+          
   deploy:
       needs: build
       runs-on: ubuntu-latest
